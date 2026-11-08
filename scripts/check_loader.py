@@ -7,3 +7,9 @@ for path in sorted(Path("data").glob("*.txt")):
     print(f"{doc.doc_id:16} | supersedes={doc.supersedes} | status={doc.status}")
     print(f"{'':16} | body starts: {doc.body[:50]!r}")
     print()
+
+
+from app.ingestion.versioning import resolve_currency
+
+docs = [parse_file(p) for p in sorted(Path("data").glob("*.txt"))]
+print("Currency:", resolve_currency(docs))
