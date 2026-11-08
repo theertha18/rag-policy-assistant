@@ -18,7 +18,7 @@ class Settings(BaseSettings):
 
     prefetch_k: int = 20
     top_k: int = 5
-    min_relevance: float = 0.05
+    min_rerank_score: float = -10.0 
     default_tenant: str = "acme"
 
 

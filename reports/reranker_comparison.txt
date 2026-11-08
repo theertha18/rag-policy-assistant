@@ -1,0 +1,37 @@
+﻿Supported re-rankers: ['Xenova/ms-marco-MiniLM-L-6-v2', 'Xenova/ms-marco-MiniLM-L-12-v2', 'BAAI/bge-reranker-base', 'BAAI/bge-reranker-v2-m3', 'BAAI/bge-reranker-v2-m3-int8', 'jinaai/jina-reranker-v1-tiny-en', 'jinaai/jina-reranker-v1-turbo-en', 'jinaai/jina-reranker-v2-base-multilingual']
+
+=== Xenova/ms-marco-MiniLM-L-6-v2
+  TEST-01   top=0.2731  raw=  -0.98  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  TEST-02   top=0.6801  raw=   0.75  IT-SPEC-2025-A   Table row: EMEA
+  TEST-03   top=0.0000  raw= -10.73  POLICY-2025-002  2. Home Office Allowance Update
+  TEST-04   top=0.0001  raw=  -9.50  POLICY-2025-002  2. Home Office Allowance Update
+  TEST-05   top=0.0005  raw=  -7.57  IT-SPEC-2025-A   General
+  EXTRA-A1  top=0.0001  raw=  -8.93  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  EXTRA-A2  top=0.0014  raw=  -6.56  IT-SPEC-2025-A   Table row: APAC
+  EXTRA-U1  top=0.0000  raw= -10.54  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  EXTRA-U2  top=0.0000  raw= -11.23  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  time for all queries: 1.32s
+
+=== jinaai/jina-reranker-v1-turbo-en
+  TEST-01   top=0.3478  raw=  -0.63  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  TEST-02   top=0.4122  raw=  -0.35  IT-SPEC-2025-A   Table row: EMEA
+  TEST-03   top=0.1150  raw=  -2.04  POLICY-2025-002  2. Home Office Allowance Update
+  TEST-04   top=0.4384  raw=  -0.25  IT-SPEC-2025-A   Table row: APAC
+  TEST-05   top=0.1693  raw=  -1.59  IT-SPEC-2025-A   General
+  EXTRA-A1  top=0.0572  raw=  -2.80  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  EXTRA-A2  top=0.3480  raw=  -0.63  IT-SPEC-2025-A   Table row: APAC
+  EXTRA-U1  top=0.0424  raw=  -3.12  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  EXTRA-U2  top=0.1900  raw=  -1.45  IT-SPEC-2025-A   Table row: US / Canada
+  time for all queries: 2.32s
+
+=== BAAI/bge-reranker-base
+  TEST-01   top=0.6292  raw=   0.53  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  TEST-02   top=0.6791  raw=   0.75  IT-SPEC-2025-A   Table row: EMEA
+  TEST-03   top=0.0004  raw=  -7.95  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  TEST-04   top=0.0071  raw=  -4.94  POLICY-2025-002  2. Home Office Allowance Update
+  TEST-05   top=0.0021  raw=  -6.14  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  EXTRA-A1  top=0.0021  raw=  -6.18  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  EXTRA-A2  top=0.0099  raw=  -4.60  IT-SPEC-2025-A   Table row: EMEA
+  EXTRA-U1  top=0.0008  raw=  -7.15  POLICY-2025-002  1. Hybrid & Remote Work Framework
+  EXTRA-U2  top=0.0001  raw=  -9.51  POLICY-2025-002  2. Home Office Allowance Update
+  time for all queries: 15.07s
