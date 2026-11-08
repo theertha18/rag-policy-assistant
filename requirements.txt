@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+pydantic>=2
+pydantic-settings
+qdrant-client>=1.12
+fastembed
+openai
+tenacity
