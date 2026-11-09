@@ -97,7 +97,7 @@ question
 
 The latency gap is visible evidence that refusal and blocking are decided by code: those cases never reach the LLM. LLM outages (rate limits, timeouts) are recorded in the report as infrastructure errors, separately from wrong answers.
 
-**Unit tests** (`tests/unit`, 56 tests, offline, no key): every component plus the service and API with fakes. Key proofs: a refused question **never calls the LLM** (`FakeLLM.calls == 0`); attacks never reach search; invented numbers are rejected; tenant and version filters always reach the store; LLM failure returns 503.
+**Unit tests** (`tests/unit`, 59 tests, offline, no key): every component plus the service and API with fakes. Key proofs: a refused question **never calls the LLM** (`FakeLLM.calls == 0`); attacks never reach search; invented numbers are rejected; tenant and version filters always reach the store; LLM failure returns 503.
 
 ### Findings the evaluation surfaced, and the fixes
 
@@ -125,7 +125,7 @@ The latency gap is visible evidence that refusal and blocking are decided by cod
 ## Security
 
 - **Tenant isolation:** tenant and currency filters are applied **inside** both retrieval branches **and** on the fused result. Other tenants' and superseded chunks are never scored (pre-filtering, defense in depth).
-- **Injection defense in layers:** input pattern guard (normalizes Unicode and zero-width characters; tested against false positives too), HTML comments stripped at ingestion, context delimited as data, the LLM has no tools or authority, output validation, and a random leak marker in the system prompt.
+- **Injection defense in layers:** input pattern guard (normalizes Unicode and zero-width characters; tested against false positives too); at ingestion, HTML comments are stripped and every chunk is scanned with the same detector, with matches quarantined (never stored) and logged by document and section; context delimited as data; the LLM has no tools or authority; output validation; and a random leak marker in the system prompt.
 - **Container:** non-root user; no secrets in the image (`.env` excluded via `.dockerignore`, passed at runtime); Debian and Python packaging updates applied at build time. A Docker Scout scan of the base image showed 4 high findings; this image has 1, reported from pip's bundled SBOM (pip vendors `pkg_resources` from setuptools 70.3.0, CVE-2025-47273). The vulnerable module (`package_index`) isn't part of what pip vendors, and pip isn't used at runtime. In production: record a VEX "not affected" statement, remove pip from the runtime image, and scan every build in CI.
 
 ## Limitations
@@ -138,6 +138,7 @@ The latency gap is visible evidence that refusal and blocking are decided by cod
 - **Strict numeric grounding** refuses correct but *derived* numbers (e.g. a monthly figure computed from an annual one). Deliberately the safer error for policy answers.
 - **Multi-part questions score low per chunk** (each chunk answers only half), which is why their relevance scores look low even when the answer is correct.
 - **LLM output varies between runs** even at temperature 0; checks target facts and status, not wording.
+- **Chunk-level quarantine.** An instruction split across chunks could slip through, and a false positive would hide a paragraph; production would quarantine the whole document for human review.
 
 ## Scaling to 10M+ documents
 
@@ -170,7 +171,7 @@ app/
   guardrails/   injection detector, output validator
   services/     RAG orchestrator
   config.py     all settings, overridable via environment
-tests/unit/     56 offline tests
+tests/unit/     59 offline tests
 tests/eval/     benchmark harness, LLM judge, report writer
 scripts/        model download, demo, investigation scripts
 reports/        evaluation and comparison results
