@@ -1,0 +1,13 @@
+﻿
+Q: What is the laptop allowance and mobile stipend for an engineer based in Germany?
+  LLM JSON: {'answerable': True, 'answer': 'For an engineer based in Germany (which is in the EMEA region):\n- Laptop Allowance (Max): Ç1,800 EUR. Laptops in EMEA must be selected from the standardized Apple or Dell corporate catalog, and custom builds require approval from the VP of Infrastructure.\n- Monthly Mobile Stipend: Ç60 EUR.', 'sources': ['S1', 'S4']}
+  validation: PASS
+  cited docs: ['IT-SPEC-2025-A', 'IT-SPEC-2025-A']
+
+Q: I am a new engineering hire in the US. How do I order my home office setup and what is my laptop budget?
+  LLM JSON: {'answerable': True, 'answer': 'For an employee in the US (US / Canada region):\n\n- **Laptop Budget:** Your maximum laptop allowance is $2,000 USD. (Additional US / Canada caps include an external monitor cap of $350 USD and a monthly mobile stipend of $75 USD).\n- **Home Office Setup & Ordering:** Your home office stipend is $750 USD per calendar year (renewable annually). To order home office items, purchases must be routed directly through the IT Procurement Portal rather than submitted as manual expense reports.', 'sources': ['S1', 'S5']}
+  validation: PASS
+  cited docs: ['IT-SPEC-2025-A', 'POLICY-2025-002']
+
+Q: What is the company policy regarding paid parental leave duration and maternity benefits?
+  LLM JSON: {'answerable': False, 'answer': '', 'sources': []}

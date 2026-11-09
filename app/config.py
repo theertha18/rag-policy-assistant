@@ -6,7 +6,7 @@ class Settings(BaseSettings):
 
     llm_api_key: str = ""
     llm_base_url: str | None = None
-    llm_model: str = "gemini-3.8-flash"
+    llm_model: str = "gemini-3.5-flash"
 
     qdrant_url: str = "http://localhost:6333"
     collection: str = "policies"
