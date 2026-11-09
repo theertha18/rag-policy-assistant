@@ -1,0 +1,7 @@
+﻿Correct answer             PASS  []
+Invented number            REJECT  ["ungrounded_numbers:['2500']"]
+Number from wrong source   REJECT  ["ungrounded_numbers:['750']"]
+No citations               REJECT  ['no_citations', "ungrounded_numbers:['1800']"]
+Leaked instructions        REJECT  ['prompt_leak', "ungrounded_numbers:['123']"]
+Injection succeeded        REJECT  ["ungrounded_numbers:['5000']"]
+Multi-doc, both cited      PASS  []
