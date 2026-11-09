@@ -1,6 +1,9 @@
 import json
 import re
+import time
 from typing import Protocol
+
+from openai import RateLimitError
 
 
 class LLMClient(Protocol):
@@ -17,12 +20,23 @@ def _parse_json(text: str) -> dict:
 class OpenAICompatibleClient:
     """Works with OpenAI, Azure OpenAI and Gemini (via its OpenAI-compatible endpoint)."""
 
-    def __init__(self, api_key: str, model: str, base_url: str | None = None, timeout: float = 30.0):
+    def __init__(self, api_key: str, model: str, base_url: str | None = None,
+                 timeout: float = 30.0, rate_limit_retries: int = 1):
         from openai import OpenAI
         self.client = OpenAI(api_key=api_key, base_url=base_url, timeout=timeout, max_retries=2)
         self.model = model
+        self.rate_limit_retries = rate_limit_retries
 
     def complete_json(self, system: str, user: str) -> dict:
+        for attempt in range(self.rate_limit_retries + 1):
+            try:
+                return self._call(system, user)
+            except RateLimitError:
+                if attempt == self.rate_limit_retries:
+                    raise
+                time.sleep(min(30, 5 * 2 ** attempt))  # wait 5 s, 10 s, 20 s, 30 s...
+
+    def _call(self, system: str, user: str) -> dict:
         response = self.client.chat.completions.create(
             model=self.model,
             temperature=0,

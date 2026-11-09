@@ -93,7 +93,7 @@ class RAGService:
                 title=labelled[label][0].payload["title"],
                 section=labelled[label][0].payload["section"],
                 relevance_score=round(labelled[label][1], 4),
-                snippet=labelled[label][0].payload["text"][:300],
+                snippet=labelled[label][0].payload["text"],
             )
             for label in cited
         ]
